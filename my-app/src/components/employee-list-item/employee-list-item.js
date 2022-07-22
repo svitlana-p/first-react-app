@@ -1,45 +1,27 @@
-import { Component } from 'react';
+
 import './employee-list-item.css';
 
 
-class EmployeesListItem extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            increase: false,
-            hasLike: false
-        }
-    }
-    onIncrease = () => {
-        this.setState(({increase})=>({
-            increase: !increase
-        }))
-    }
-    onLike = () => {
-        this.setState(({hasLike})=>({
-            hasLike : !hasLike
-        }))
-    }
+const EmployeesListItem = (props) => {
 
-    render() {
-        const {name, salary, onDelete} = this.props;
-        const {increase, hasLike} = this.state;
-        let classNames = "list-group-item d-flex justify-content-between";
-        if (increase) {
-            classNames += ' increase'
-        } 
+    const {name, salary, onDelete, onToggleIncrease, onToggleRise, increase, rise} = props;
         
-        if (hasLike) {
-            classNames += ' like'
-        }
+    let classNames = "list-group-item d-flex justify-content-between";
+    if (increase) {
+        classNames += ' increase'
+    } 
+        
+    if (rise) {
+        classNames += ' like'
+    }
 
  
-       return (
+    return (
         <li className={classNames}>
-            <span onClick= {this.onLike} className='list-group-item-label'>{name}</span>
+            <span onClick= {onToggleRise} className='list-group-item-label'>{name}</span>
             <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
             <div className='d-flex justify-content-center align-items-center'>
-                <button onClick = {this.onIncrease} type="button"
+                <button onClick = {onToggleIncrease} type="button"
                     className="btn-cookie btn-sm ">
                     <i className="fas fa-cookie"></i>
                 </button>
@@ -52,9 +34,7 @@ class EmployeesListItem extends Component {
                 <i className="fa-solid fa-star"></i>
             </div>
         </li>
-    )
-    }
-    
+    )   
     
 }
 
